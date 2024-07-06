@@ -10,9 +10,10 @@
     <div id="girisKutusu">
         <h2>Lütfen İsminizi Girin</h2>
         <input type="text" id="isimInput" placeholder="İsminizi girin...">
-        <button onclick="onayla()">Onayla</button>
+        <button onclick="girisYap()">Giriş Yap</button>
     </div>
     <div id="chatAlanı" style="display: none;">
+        <div id="onlineKullanicilar"></div>
         <div id="mesajlar"></div>
         <form id="mesajFormu" onsubmit="mesajGonder(); return false;">
             <input type="text" id="mesajInput" placeholder="Mesajınızı yazın...">
