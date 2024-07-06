@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>GitHub Pages Örneği</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Uygulaması</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Merhaba, GitHub Pages!</h1>
-    <p>Bu benim ilk GitHub Pages web sayfam.</p>
+    <div id="girisKutusu">
+        <h2>Lütfen İsminizi Girin</h2>
+        <input type="text" id="isimInput" placeholder="İsminizi girin...">
+        <button onclick="onayla()">Onayla</button>
+    </div>
+    <div id="chatAlanı" style="display: none;">
+        <div id="mesajlar"></div>
+        <form id="mesajFormu" onsubmit="mesajGonder(); return false;">
+            <input type="text" id="mesajInput" placeholder="Mesajınızı yazın...">
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
