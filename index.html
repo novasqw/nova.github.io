@@ -1,25 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Uygulaması</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Github Aktif Chat</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="girisKutusu">
-        <h2>Lütfen İsminizi Girin</h2>
-        <input type="text" id="isimInput" placeholder="İsminizi girin...">
-        <button onclick="girisYap()">Giriş Yap</button>
+    <div class="container">
+        <div class="header">
+            <h1>Github Aktif Chat</h1>
+            <div id="active-users">Aktif Kullanıcılar: 0</div>
+        </div>
+        <div class="chat-panel" id="chat-panel">
+            <!-- Mesajlar burada görüntülenecek -->
+        </div>
+        <div class="input-box">
+            <input type="text" id="usernameInput" placeholder="Kullanıcı Adı...">
+            <button onclick="setUsername()">Giriş Yap</button>
+            <input type="file" id="fileInput" accept="image/*, video/*">
+            <button onclick="sendMessage()">Gönder</button>
+        </div>
     </div>
-    <div id="chatAlanı" style="display: none;">
-        <div id="onlineKullanicilar"></div>
-        <div id="mesajlar"></div>
-        <form id="mesajFormu" onsubmit="mesajGonder(); return false;">
-            <input type="text" id="mesajInput" placeholder="Mesajınızı yazın...">
-            <button type="submit">Gönder</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
+
+    <script>
+        // WebSocket ile iletişim kuracak JavaScript kodları buraya gelecek
+    </script>
 </body>
 </html>
