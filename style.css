@@ -1,0 +1,39 @@
+body {
+    background-color: #000;
+    background-image: url('snow.jpg'); /* Karlı arka plan resmi */
+    background-size: cover;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+#girisKutusu, #chatAlanı {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+#girisKutusu input, #girisKutusu button, #mesajInput, #mesajFormu button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+#girisKutusu input, #mesajInput {
+    width: calc(100% - 80px);
+}
+
+#girisKutusu button, #mesajFormu button {
+    width: 80px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#mesajlar {
+    max-height: 300px;
+    overflow-y: auto;
+}
