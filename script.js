@@ -1,47 +1,49 @@
-let websocket;
-let username;
+// WebSocket bağlantısı
+const socket = new WebSocket('ws://localhost:3000'); // Sunucu adresini ve portunu buraya yazın
 
-function initWebSocket() {
-    websocket = new WebSocket('ws://localhost:8080'); // WebSocket bağlantısı (uygulamanızın sunucusuna uygun URL'yi verin)
+// Kullanıcı adı
+let username = '';
 
-    websocket.onopen = function(event) {
-        console.log('WebSocket bağlantısı kuruldu.');
-    };
-
-    websocket.onmessage = function(event) {
-        const message = JSON.parse(event.data);
-        if (message.type === 'onlineUsers') {
-            // Aktif kullanıcıları göster
-            const onlineUsersDiv = document.getElementById('onlineKullanicilar');
-            onlineUsersDiv.innerHTML = `<strong>Aktif Kullanıcılar (${message.data.length})</strong>: ${message.data.join(', ')}`;
-        } else if (message.type === 'message') {
-            // Yeni mesajı ekle
-            const mesajlarDiv = document.getElementById('mesajlar');
-            mesajlarDiv.innerHTML += `<p><strong>${message.username}:</strong> ${message.content}</p>`;
-            mesajlarDiv.scrollTop = mesajlarDiv.scrollHeight;
-        }
-    };
-}
-
-function girisYap() {
-    username = document.getElementById('isimInput').value;
-    if (username.trim() !== '') {
-        document.getElementById('girisKutusu').style.display = 'none';
-        document.getElementById('chatAlanı').style.display = 'block';
-        initWebSocket();
+// Kullanıcı adını ayarla
+function setUsername() {
+    username = document.getElementById('usernameInput').value.trim();
+    if (username !== '') {
+        document.getElementById('usernameInput').disabled = true;
+        document.getElementById('fileInput').style.display = 'inline-block';
+        socket.send(JSON.stringify({ type: 'username', username }));
     }
 }
 
-function mesajGonder() {
-    const mesajInput = document.getElementById('mesajInput');
-    const content = mesajInput.value.trim();
-    if (content !== '') {
-        const message = {
-            type: 'message',
-            username: username,
-            content: content
-        };
-        websocket.send(JSON.stringify(message));
-        mesajInput.value = '';
+// Mesaj gönder
+function sendMessage() {
+    const messageInput = document.getElementById('usernameInput');
+    const message = messageInput.value.trim();
+    if (message !== '') {
+        socket.send(JSON.stringify({ type: 'message', username, message }));
+        messageInput.value = '';
     }
+}
+
+// WebSocket mesajları dinleme
+socket.addEventListener('message', function(event) {
+    const message = JSON.parse(event.data);
+    if (message.type === 'activeUsers') {
+        updateActiveUsers(message.count);
+    } else if (message.type === 'chatMessage') {
+        displayMessage(message.username, message.message);
+    }
+});
+
+// Aktif kullanıcı sayısını güncelle
+function updateActiveUsers(count) {
+    document.getElementById('active-users').textContent = `Aktif Kullanıcılar: ${count}`;
+}
+
+// Mesajları ekrana göster
+function displayMessage(username, message) {
+    const chatPanel = document.getElementById('chat-panel');
+    const messageElement = document.createElement('div');
+    messageElement.innerHTML = `<strong>${username}:</strong> ${message}`;
+    chatPanel.appendChild(messageElement);
+    chatPanel.scrollTop = chatPanel.scrollHeight; // Otomatik olarak aşağı kaydır
 }
