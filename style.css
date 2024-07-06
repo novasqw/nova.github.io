@@ -1,9 +1,7 @@
 body {
-    background-color: #000;
-    background-image: url('snow.jpg'); /* Karlı arka plan resmi */
-    background-size: cover;
-    color: #fff;
+    background-color: #f2f2f2;
     font-family: Arial, sans-serif;
+    margin: 0;
     padding: 20px;
 }
 
@@ -11,29 +9,32 @@ body {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 #girisKutusu input, #girisKutusu button, #mesajInput, #mesajFormu button {
     padding: 10px;
     margin: 5px;
     border: none;
-    border-radius: 5px;
-}
-
-#girisKutusu input, #mesajInput {
-    width: calc(100% - 80px);
+    border-radius: 3px;
 }
 
 #girisKutusu button, #mesajFormu button {
-    width: 80px;
-    cursor: pointer;
     background-color: #4CAF50;
     color: white;
+    cursor: pointer;
 }
 
 #mesajlar {
     max-height: 300px;
     overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+#onlineKullanicilar {
+    margin-bottom: 10px;
 }
