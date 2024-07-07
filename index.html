@@ -3,104 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gartic Bot Panel V1</title>
+    <title>Romantic Proposal</title>
     <style>
         body {
+            background-color: darkgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .menu {
             background-color: black;
             color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .panel {
-            margin: 20px auto;
-            width: 50%;
-            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        .roses {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('roses.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
         }
         .button {
-            margin: 10px;
             padding: 10px 20px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 5px;
+            font-size: 18px;
             cursor: pointer;
         }
-        .button-green {
+        .yes-button {
             background-color: green;
             color: white;
+            box-shadow: 0 0 10px 2px #0f0;
         }
-        .button-blue {
-            background-color: blue;
+        .no-button {
+            background-color: red;
             color: white;
+            box-shadow: 0 0 10px 2px #f00;
         }
-        .button-yellow {
-            background-color: yellow;
-            color: black;
+        .falling {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
         }
-        #avatar-options {
-            display: none;
-            margin-top: 10px;
+        .falling .heart, .falling .rose {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: fall 5s infinite linear;
         }
-        #avatar-options button {
-            margin: 5px;
-        }
-        .input-box {
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid white;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-        .checkbox-label {
-            display: block;
-            margin: 10px;
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 110%; }
         }
     </style>
 </head>
 <body>
-    <div class="panel">
-        <h1>Gartic Bot Panel V1</h1>
-        <button class="button button-green" id="avatar-select">Avatar seç</button>
-        <div id="avatar-options">
-            <button class="button" onclick="selectAvatar(0)">0</button>
-            <button class="button" onclick="selectAvatar(1)">1</button>
-            <button class="button" onclick="selectAvatar(2)">2</button>
-            <!-- Add buttons up to 32 as needed -->
-            <button class="button" onclick="selectAvatar(32)">32</button>
+    <div class="roses"></div>
+    <div class="menu" id="menu">
+        Benimle evlenir misin tuba💍???
+        <div class="button-container">
+            <button class="button yes-button" onclick="handleYes()">Evet</button>
+            <button class="button no-button" id="no-button" onclick="handleNo()">Hayır</button>
         </div>
-        <input type="text" id="bot-nick" class="input-box" placeholder="Bot Nick">
-        <br>
-        <input type="text" id="room-code" class="input-box" placeholder="Oda Kodu">
-        <button class="button button-green" id="join">Join</button>
-        <button class="button button-blue" id="exit">Exit</button>
-        <button class="button button-yellow" id="kick-all">Herkesi Kickle</button>
-        <br>
-        <label class="checkbox-label"><input type="checkbox" id="no-kick"> Kicksiz bot</label>
-        <label class="checkbox-label"><input type="checkbox" id="rejoin"> Rejoin</label>
-        <label class="checkbox-label"><input type="checkbox" id="auto-guess"> Auto Guess</label>
-        <br>
-        <input type="text" id="chat-message" class="input-box" placeholder="Chat message">
-        <button class="button button-blue" id="send">Gönder</button>
-        <button class="button button-blue" id="spam">Spamla</button>
     </div>
-
+    <div class="falling" id="falling"></div>
     <script>
-        document.getElementById('avatar-select').addEventListener('click', function() {
-            const avatarOptions = document.getElementById('avatar-options');
-            if (avatarOptions.style.display === 'none') {
-                avatarOptions.style.display = 'block';
-            } else {
-                avatarOptions.style.display = 'none';
-            }
-        });
+        const menu = document.getElementById('menu');
+        const noButton = document.getElementById('no-button');
+        const falling = document.getElementById('falling');
+        let noClickCount = 0;
 
-        function selectAvatar(number) {
-            const avatarSelectButton = document.getElementById('avatar-select');
-            avatarSelectButton.innerHTML = `Avatar: ${number}`;
-            document.getElementById('avatar-options').style.display = 'none';
+        function randomizeLetters() {
+            let message = 'Benimle evlenir misin tuba💍???';
+            let current = '';
+            let interval = setInterval(() => {
+                if (current.length < message.length) {
+                    current += message[current.length];
+                    menu.firstChild.nodeValue = current.split('').sort(() => Math.random() - 0.5).join('');
+                } else {
+                    clearInterval(interval);
+                    menu.firstChild.nodeValue = message;
+                }
+            }, 100);
         }
+
+        function handleYes() {
+            menu.firstChild.nodeValue = 'Seni çoookk seviyoruuummm';
+            setTimeout(() => {
+                menu.firstChild.nodeValue = 'Artık evliyizzz🥳🥳🥳';
+                createFallingElements();
+            }, 1000);
+        }
+
+        function handleNo() {
+            noClickCount++;
+            if (noClickCount === 1) {
+                menu.firstChild.nodeValue = 'Hadi amaa noluuyyy🥺🥺';
+            } else {
+                menu.firstChild.nodeValue = 'O yüzük takılıcakkk!!';
+            }
+            moveNoButton();
+        }
+
+        function moveNoButton() {
+            noButton.style.position = 'absolute';
+            noButton.style.top = Math.random() * 90 + '%';
+            noButton.style.left = Math.random() * 90 + '%';
+        }
+
+        function createFallingElements() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                falling.appendChild(heart);
+                
+                let rose = document.createElement('div');
+                rose.className = 'rose';
+                rose.style.left = Math.random() * 100 + '%';
+                rose.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                falling.appendChild(rose);
+            }
+        }
+
+        randomizeLetters();
     </script>
 </body>
 </html>
