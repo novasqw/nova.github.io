@@ -6,7 +6,7 @@
     <title>Romantic Proposal</title>
     <style>
         body {
-            background-color: darkgray;
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,6 +14,7 @@
             margin: 0;
             overflow: hidden;
             position: relative;
+            color: white;
         }
         .menu {
             background-color: black;
@@ -66,10 +67,9 @@
             overflow: hidden;
             z-index: 0;
         }
-        .falling .heart, .falling .rose {
+        .falling .emoji, .falling .phrase {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            font-size: 24px;
             animation: fall 5s infinite linear;
         }
         @keyframes fall {
@@ -94,6 +94,19 @@
         const falling = document.getElementById('falling');
         let noClickCount = 0;
 
+        const phrases = [
+            "Seni çook seviyorum", 
+            "Canım bebeğim", 
+            "Kalbim", 
+            "Aşkım", 
+            "Bir tanem", 
+            "Hayatım", 
+            "Ruh eşim", 
+            "Sevgilim", 
+            "Tatlım", 
+            "Meleğim"
+        ];
+
         function randomizeLetters() {
             let message = 'Benimle evlenir misin tuba💍???';
             let current = '';
@@ -109,7 +122,7 @@
         }
 
         function handleYes() {
-            menu.firstChild.nodeValue = 'Seni çoookk seviyoruuummm';
+            menu.firstChild.nodeValue = 'Yuppiiiii🥳🥳🥳';
             setTimeout(() => {
                 menu.firstChild.nodeValue = 'Artık evliyizzz🥳🥳🥳';
                 createFallingElements();
@@ -133,19 +146,24 @@
         }
 
         function createFallingElements() {
+            const emojis = ['⚘', '💖'];
             for (let i = 0; i < 20; i++) {
-                let heart = document.createElement('div');
-                heart.className = '💖';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                falling.appendChild(heart);
-                
-                let rose = document.createElement('div');
-                rose.className = '⚘';
-                rose.style.left = Math.random() * 100 + '%';
-                rose.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                falling.appendChild(rose);
+                let emoji = document.createElement('div');
+                emoji.className = 'emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + '%';
+                emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                falling.appendChild(emoji);
             }
+
+            phrases.forEach(phrase => {
+                let phraseElement = document.createElement('div');
+                phraseElement.className = 'phrase';
+                phraseElement.textContent = phrase;
+                phraseElement.style.left = Math.random() * 100 + '%';
+                phraseElement.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                falling.appendChild(phraseElement);
+            });
         }
 
         randomizeLetters();
