@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanıcı Girişi</title>
+    <title>Gartic Bot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="girisKutusu">
-        <h2>Lütfen İsminizi Girin</h2>
-        <input type="text" id="isimInput" placeholder="İsminizi girin...">
-        <button onclick="onayla()">Onayla</button>
-    </div>
-    <div id="chatAlanı" style="display: none;">
-        <div id="mesajlar"></div>
-        <form id="mesajFormu" onsubmit="mesajGonder(); return false;">
-            <input type="text" id="mesajInput" placeholder="Mesajınızı yazın...">
-            <button type="submit">Gönder</button>
-        </form>
+    <div class="container">
+        <h1>Gartic Bot</h1>
+        <div class="input-group">
+            <input type="text" id="roomCodeInput" placeholder="Oda Kodu">
+            <button onclick="enterRoom()">Gir</button>
+            <button onclick="exitRoom()">Çık</button>
+        </div>
+        <button onclick="addBot()">Bot Ekle</button>
+        <div id="iframeContainer"></div>
     </div>
     <script src="script.js"></script>
 </body>
