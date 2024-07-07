@@ -1,17 +1,106 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benimle Evlenir Misin Tuba?</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Gartic Bot Panel V1</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .panel {
+            margin: 20px auto;
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button-green {
+            background-color: green;
+            color: white;
+        }
+        .button-blue {
+            background-color: blue;
+            color: white;
+        }
+        .button-yellow {
+            background-color: yellow;
+            color: black;
+        }
+        #avatar-options {
+            display: none;
+            margin-top: 10px;
+        }
+        #avatar-options button {
+            margin: 5px;
+        }
+        .input-box {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .checkbox-label {
+            display: block;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div id="panel">
-        <div id="message">Benimle Evlenir misin Tuba?</div>
-        <button id="yes-btn">Evet</button>
-        <button id="no-btn">Hayır</button>
+    <div class="panel">
+        <h1>Gartic Bot Panel V1</h1>
+        <button class="button button-green" id="avatar-select">Avatar seç</button>
+        <div id="avatar-options">
+            <button class="button" onclick="selectAvatar(0)">0</button>
+            <button class="button" onclick="selectAvatar(1)">1</button>
+            <button class="button" onclick="selectAvatar(2)">2</button>
+            <!-- Add buttons up to 32 as needed -->
+            <button class="button" onclick="selectAvatar(32)">32</button>
+        </div>
+        <input type="text" id="bot-nick" class="input-box" placeholder="Bot Nick">
+        <br>
+        <input type="text" id="room-code" class="input-box" placeholder="Oda Kodu">
+        <button class="button button-green" id="join">Join</button>
+        <button class="button button-blue" id="exit">Exit</button>
+        <button class="button button-yellow" id="kick-all">Herkesi Kickle</button>
+        <br>
+        <label class="checkbox-label"><input type="checkbox" id="no-kick"> Kicksiz bot</label>
+        <label class="checkbox-label"><input type="checkbox" id="rejoin"> Rejoin</label>
+        <label class="checkbox-label"><input type="checkbox" id="auto-guess"> Auto Guess</label>
+        <br>
+        <input type="text" id="chat-message" class="input-box" placeholder="Chat message">
+        <button class="button button-blue" id="send">Gönder</button>
+        <button class="button button-blue" id="spam">Spamla</button>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        document.getElementById('avatar-select').addEventListener('click', function() {
+            const avatarOptions = document.getElementById('avatar-options');
+            if (avatarOptions.style.display === 'none') {
+                avatarOptions.style.display = 'block';
+            } else {
+                avatarOptions.style.display = 'none';
+            }
+        });
+
+        function selectAvatar(number) {
+            const avatarSelectButton = document.getElementById('avatar-select');
+            avatarSelectButton.innerHTML = `Avatar: ${number}`;
+            document.getElementById('avatar-options').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
