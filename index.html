@@ -1,36 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chat App</title>
-  <link rel="stylesheet" href="styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Girişi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="login-box">
-    <h2>Login</h2>
-    <form id="loginForm">
-      <div class="textbox">
-        <input type="text" placeholder="Enter your username" id="username" required>
-      </div>
-      <div class="textbox">
-        <input type="password" placeholder="Enter your password" id="password" required>
-      </div>
-      <input type="submit" class="btn" value="Login">
-    </form>
-    <p id="error" class="error"></p>
-  </div>
-
-  <div id="chatContainer" class="chat-container hidden">
-    <div id="messages" class="messages"></div>
-    <form id="messageForm">
-      <input id="messageInput" type="text" placeholder="Enter your message" required autocomplete="off">
-      <button type="submit">Send</button>
-      <button type="button" id="uploadBtn">Upload Photo/Video</button>
-    </form>
-  </div>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="scripts/main.js"></script>
+    <div id="girisKutusu">
+        <h2>Lütfen İsminizi Girin</h2>
+        <input type="text" id="isimInput" placeholder="İsminizi girin...">
+        <button onclick="onayla()">Onayla</button>
+    </div>
+    <div id="chatAlanı" style="display: none;">
+        <div id="mesajlar"></div>
+        <form id="mesajFormu" onsubmit="mesajGonder(); return false;">
+            <input type="text" id="mesajInput" placeholder="Mesajınızı yazın...">
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
