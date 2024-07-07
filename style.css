@@ -17,6 +17,7 @@ body {
     color: white;
     font-family: 'Arial', sans-serif;
     position: relative;
+    width: 300px;
 }
 
 #message {
@@ -36,7 +37,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: transform 0.3s;
 }
 
 #yes-btn {
