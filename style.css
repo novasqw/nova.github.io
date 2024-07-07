@@ -1,39 +1,33 @@
 body {
-    background-color: #000;
-    background-image: url('snow.jpg'); /* Karlı arka plan resmi */
-    background-size: cover;
-    color: #fff;
+    background-color: black;
+    color: white;
     font-family: Arial, sans-serif;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-#girisKutusu, #chatAlanı {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+.container {
+    text-align: center;
 }
 
-#girisKutusu input, #girisKutusu button, #mesajInput, #mesajFormu button {
+.input-group {
+    margin-bottom: 20px;
+}
+
+input, button {
     padding: 10px;
     margin: 5px;
     border: none;
     border-radius: 5px;
 }
 
-#girisKutusu input, #mesajInput {
-    width: calc(100% - 80px);
-}
-
-#girisKutusu button, #mesajFormu button {
-    width: 80px;
+button {
     cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
 }
 
-#mesajlar {
-    max-height: 300px;
-    overflow-y: auto;
+#iframeContainer {
+    margin-top: 20px;
 }
