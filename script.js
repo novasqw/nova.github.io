@@ -1,30 +1,26 @@
-function enterRoom() {
-    const roomCode = document.getElementById('roomCodeInput').value;
-    if (roomCode.trim() !== '') {
-        const iframes = document.querySelectorAll('iframe');
-        iframes.forEach(iframe => {
-            iframe.contentWindow.postMessage({ action: 'enter', roomCode: roomCode }, '*');
-        });
-    }
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const panel = document.getElementById('panel');
+    const message = document.getElementById('message');
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
 
-function exitRoom() {
-    const iframes = document.querySelectorAll('iframe');
-    iframes.forEach(iframe => {
-        iframe.contentWindow.postMessage({ action: 'exit' }, '*');
+    yesBtn.addEventListener('click', function() {
+        message.textContent = 'Oleeeyyyy🥳🥳🥳🥳';
+        panel.classList.add('yes');
     });
-}
 
-function addBot() {
-    const iframeContainer = document.getElementById('iframeContainer');
-    const iframe = document.createElement('iframe');
-    iframe.src = 'https://gartic.io';
-    iframe.width = '300';
-    iframe.height = '200';
-    iframe.style.border = '1px solid white';
-    iframeContainer.appendChild(iframe);
+    noBtn.addEventListener('click', function() {
+        const randomX = Math.floor(Math.random() * (window.innerWidth - noBtn.clientWidth));
+        const randomY = Math.floor(Math.random() * (window.innerHeight - noBtn.clientHeight));
 
-    iframe.onload = function() {
-        iframe.contentWindow.postMessage({ action: 'navigate', url: 'https://blockaway.com' }, '*');
-    };
-}
+        noBtn.style.position = 'absolute';
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
+
+        if (message.textContent === 'Benimle Evlenir misin Tuba?') {
+            message.textContent = 'Noluuyyyyy🥺🥺🥺';
+        } else {
+            message.textContent = 'Hayır evleneceksin benimle!';
+        }
+    });
+});
