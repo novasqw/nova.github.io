@@ -48,15 +48,21 @@
             color: white;
             margin-top: 5px;
         }
-        #botekle {
-            background: green;
-            color: white;
+        #botekle, #botkaldir {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             display: inline-block;
             margin-top: 20px;
+            color: white;
+        }
+        #botekle {
+            background: green;
+        }
+        #botkaldir {
+            background: red;
+            margin-left: 10px;
         }
         .iframe-container {
             margin-top: 20px;
@@ -89,6 +95,7 @@
         <div class="userkickmenu"></div>
     </div>
     <button id="botekle" onclick="addBot()">Bot Ekle</button>
+    <button id="botkaldir" onclick="removeBot()">Bot Kaldır</button>
     <div class="iframe-container" id="iframeContainer"></div>
 
     <script>
@@ -98,26 +105,22 @@
         function joinRoom() {
             roomLink = document.querySelector('.roomlink').value;
             if (roomLink) {
-                // Burada gartic.io'ya bağlanma işlemleri yapılacak
                 alert("Odaya Giriliyor: " + roomLink);
             }
         }
 
         function leaveRoom() {
-            // Odayı terk etme işlemleri
             alert("Odadan Çıkılıyor");
         }
 
         function sendMessage() {
             let message = document.querySelector('.mesg').value;
             if (message) {
-                // Mesaj gönderme işlemleri
                 alert("Mesaj Gönderiliyor: " + message);
             }
         }
 
         function sendReport() {
-            // Report gönderme işlemleri
             alert("Report Gönderiliyor");
         }
 
@@ -125,10 +128,27 @@
             let iframeContainer = document.getElementById('iframeContainer');
             let iframe = document.createElement('iframe');
             iframe.src = 'https://blockaway.net';
-            iframe.width = '300';
-            iframe.height = '200';
+            iframe.width = '600';
+            iframe.height = '400';
             iframe.style.border = 'none';
             iframeContainer.appendChild(iframe);
+            botCount++;
+            updateBotCount();
+        }
+
+        function removeBot() {
+            let iframeContainer = document.getElementById('iframeContainer');
+            if (iframeContainer.lastChild) {
+                iframeContainer.removeChild(iframeContainer.lastChild);
+                botCount--;
+                updateBotCount();
+            } else {
+                alert("Hiç bot eklenmemiş!");
+            }
+        }
+
+        function updateBotCount() {
+            document.querySelector('.taktifbot').innerText = botCount;
         }
     </script>
 </body>
