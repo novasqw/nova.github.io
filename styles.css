@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Beyaz arka plan */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.center-box {
+    background-color: #f0f0f0; /* Açık gri bir arka plan */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+.center-box h2 {
+    margin-top: 0;
+}
+
+.chat-panel {
+    background-color: #f0f0f0; /* Açık gri bir arka plan */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    margin: 20px auto;
+}
+
+.chat-panel.hidden {
+    display: none; /* Başlangıçta gizli */
+}
+
+.message-area {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.message-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.message-input input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.message-input button {
+    padding: 8px 20px;
+    border: none;
+    background-color: #4CAF50; /* Yeşil gönderme butonu */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message-input button:hover {
+    background-color: #45a049;
+}
+
+input[type="file"] {
+    display: none; /* Dosya yükleme inputunu gizle */
+}
