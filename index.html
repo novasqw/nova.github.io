@@ -61,9 +61,20 @@
         .iframe-container {
             margin-top: 20px;
         }
+        .header {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .developer {
+            font-size: 0.8em;
+            margin-bottom: 20px;
+            color: gray;
+        }
     </style>
 </head>
 <body>
+    <div class="header">BOT PANEL V2</div>
+    <div class="developer">Developer by nova</div>
     <div class="panel">
         <h3>Japon Bot (<span class="taktifbot">0</span> bot)</h3>
         <input type="text" class="roomlink" placeholder="Oda Linki">
@@ -83,41 +94,53 @@
     <script>
         let botCount = 0;
         let roomLink = "";
+        const iframes = [];
 
         function joinRoom() {
             roomLink = document.querySelector('.roomlink').value;
             if (roomLink) {
-                // Burada gartic.io'ya bağlanma işlemleri yapılacak
+                iframes.forEach(iframe => {
+                    iframe.contentWindow.postMessage({ action: 'join', roomLink: roomLink }, '*');
+                });
                 alert("Odaya Giriliyor: " + roomLink);
             }
         }
 
         function leaveRoom() {
-            // Odayı terk etme işlemleri
+            iframes.forEach(iframe => {
+                iframe.contentWindow.postMessage({ action: 'leave' }, '*');
+            });
             alert("Odadan Çıkılıyor");
         }
 
         function sendMessage() {
             let message = document.querySelector('.mesg').value;
             if (message) {
-                // Mesaj gönderme işlemleri
+                iframes.forEach(iframe => {
+                    iframe.contentWindow.postMessage({ action: 'sendMessage', message: message }, '*');
+                });
                 alert("Mesaj Gönderiliyor: " + message);
             }
         }
 
         function sendReport() {
-            // Report gönderme işlemleri
+            iframes.forEach(iframe => {
+                iframe.contentWindow.postMessage({ action: 'sendReport' }, '*');
+            });
             alert("Report Gönderiliyor");
         }
 
         function addBot() {
             let iframeContainer = document.getElementById('iframeContainer');
             let iframe = document.createElement('iframe');
-            iframe.src = 'https://blockaway.net';
+            iframe.src = 'https://gartic.io';
             iframe.width = '300';
             iframe.height = '200';
             iframe.style.border = 'none';
             iframeContainer.appendChild(iframe);
+            iframes.push(iframe);
+            botCount++;
+            document.querySelector('.taktifbot').innerText = botCount;
         }
     </script>
 </body>
