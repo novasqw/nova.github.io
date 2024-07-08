@@ -1,174 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilammmmmm</title>
+    <title>Japon Bot</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         body {
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Roboto', sans-serif;
+            background-color: #101112;
             color: white;
-        }
-        .menu {
-            background-color: black;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
             text-align: center;
-            font-size: 24px;
-            position: relative;
-            z-index: 1;
+            padding-top: 20px;
         }
-        .roses {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('roses.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
+        .panel {
+            display: inline-block;
+            background: #2c2c2e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-        .button-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
+        .panel h3 {
+            color: purple;
         }
-        .button {
+        .panel input[type=text], .panel input[type=submit] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .panel input[type=text] {
+            background: #3b3b3d;
+            color: white;
+        }
+        .panel input[type=submit] {
+            background: purple;
+            color: white;
+            cursor: pointer;
+        }
+        .panel input[type=checkbox] {
+            margin-right: 10px;
+        }
+        .userkickmenu input[type=submit] {
+            background: red;
+            color: white;
+            margin-top: 5px;
+        }
+        #botekle {
+            background: green;
+            color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
             cursor: pointer;
+            display: inline-block;
+            margin-top: 20px;
         }
-        .yes-button {
-            background-color: green;
-            color: white;
-            box-shadow: 0 0 10px 2px #0f0;
-        }
-        .no-button {
-            background-color: red;
-            color: white;
-            box-shadow: 0 0 10px 2px #f00;
-        }
-        .falling {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        .falling .emoji, .falling .phrase {
-            position: absolute;
-            font-size: 24px;
-            animation: fall 5s infinite linear;
-        }
-        @keyframes fall {
-            0% { top: -10%; }
-            100% { top: 110%; }
+        .iframe-container {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="roses"></div>
-    <div class="menu" id="menu">
-        Benimle evlenir misin dila💍???
-        <div class="button-container">
-            <button class="button yes-button" onclick="handleYes()">Evet</button>
-            <button class="button no-button" id="no-button" onclick="handleNo()">Hayır</button>
-        </div>
+    <div class="panel">
+        <h3>Japon Bot (<span class="taktifbot">0</span> bot)</h3>
+        <input type="text" class="roomlink" placeholder="Oda Linki">
+        <input type="submit" onclick="joinRoom()" value="Gir">
+        <input type="submit" onclick="leaveRoom()" value="Çık">
+        <input type="text" class="mesg" placeholder="Chat Mesajı">
+        <input type="submit" onclick="sendMessage()" value="Gönder">
+        <input type="submit" onclick="sendReport()" value="Report">
+        <input type="checkbox" class="kickonjoin"> Girişte İlk Sıradakini Oyla
+        <input type="checkbox" class="kicknew"> Yeni Giren Oyuncuları Oyla
+        <hr>
+        <div class="userkickmenu"></div>
     </div>
-    <div class="falling" id="falling"></div>
+    <button id="botekle" onclick="addBot()">Bot Ekle</button>
+    <div class="iframe-container" id="iframeContainer"></div>
+
     <script>
-        const menu = document.getElementById('menu');
-        const noButton = document.getElementById('no-button');
-        const falling = document.getElementById('falling');
-        let noClickCount = 0;
+        let botCount = 0;
+        let roomLink = "";
 
-        const phrases = [
-            "Seni çook seviyorum", 
-            "Canım bebeğim", 
-            "Kalbim", 
-            "Aşkım", 
-            "Bir tanem", 
-            "Hayatım", 
-            "Ruh eşim", 
-            "Sevgilim", 
-            "Yavrum benimm",
-            "hayatımın askıı",
-            "Tatlım", 
-            "Meleğim"
-        ];
-
-        function randomizeLetters() {
-            let message = 'Benimle evlenir misin dila💍???';
-            let current = '';
-            let interval = setInterval(() => {
-                if (current.length < message.length) {
-                    current += message[current.length];
-                    menu.firstChild.nodeValue = current.split('').sort(() => Math.random() - 0.5).join('');
-                } else {
-                    clearInterval(interval);
-                    menu.firstChild.nodeValue = message;
-                }
-            }, 100);
-        }
-
-        function handleYes() {
-            menu.firstChild.nodeValue = 'Yuppiiiii🥳🥳🥳';
-            setTimeout(() => {
-                menu.firstChild.nodeValue = 'Artık evliyizzz🥳🥳🥳';
-                createFallingElements();
-            }, 1000);
-        }
-
-        function handleNo() {
-            noClickCount++;
-            if (noClickCount === 1) {
-                menu.firstChild.nodeValue = 'Hadi amaa noluuyyy🥺🥺';
-            } else {
-                menu.firstChild.nodeValue = 'O yüzük takılıcakkk!!';
+        function joinRoom() {
+            roomLink = document.querySelector('.roomlink').value;
+            if (roomLink) {
+                // Burada gartic.io'ya bağlanma işlemleri yapılacak
+                alert("Odaya Giriliyor: " + roomLink);
             }
-            moveNoButton();
         }
 
-        function moveNoButton() {
-            noButton.style.position = 'absolute';
-            noButton.style.top = Math.random() * 90 + '%';
-            noButton.style.left = Math.random() * 90 + '%';
+        function leaveRoom() {
+            // Odayı terk etme işlemleri
+            alert("Odadan Çıkılıyor");
         }
 
-        function createFallingElements() {
-            const emojis = ['⚘', '💖', '💋', '❤', '🧡', '💛', '💚', '💙', '💜', '😻', '🌺', '🌷',];
-            for (let i = 0; i < 20; i++) {
-                let emoji = document.createElement('div');
-                emoji.className = 'emoji';
-                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                emoji.style.left = Math.random() * 100 + '%';
-                emoji.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                falling.appendChild(emoji);
+        function sendMessage() {
+            let message = document.querySelector('.mesg').value;
+            if (message) {
+                // Mesaj gönderme işlemleri
+                alert("Mesaj Gönderiliyor: " + message);
             }
-
-            phrases.forEach(phrase => {
-                let phraseElement = document.createElement('div');
-                phraseElement.className = 'phrase';
-                phraseElement.textContent = phrase;
-                phraseElement.style.left = Math.random() * 100 + '%';
-                phraseElement.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                falling.appendChild(phraseElement);
-            });
         }
 
-        randomizeLetters();
+        function sendReport() {
+            // Report gönderme işlemleri
+            alert("Report Gönderiliyor");
+        }
+
+        function addBot() {
+            let iframeContainer = document.getElementById('iframeContainer');
+            let iframe = document.createElement('iframe');
+            iframe.src = 'https://blockaway.net';
+            iframe.width = '300';
+            iframe.height = '200';
+            iframe.style.border = 'none';
+            iframeContainer.appendChild(iframe);
+        }
     </script>
 </body>
 </html>
