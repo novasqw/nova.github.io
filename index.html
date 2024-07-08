@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Chat</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file for styling -->
+    <title>Canlı Sohbet Uygulaması</title>
+    <link rel="stylesheet" href="styles.css"> <!-- CSS dosyası -->
 </head>
 <body>
     <div class="container">
-        <div id="passwordSection">
-            <h2>Welcome to Photo Chat!</h2>
-            <p>Please enter the password to continue:</p>
-            <input type="password" id="passwordInput" placeholder="Enter your password">
-            <button onclick="checkPassword()">Enter</button>
-            <p id="passwordMessage" class="notification"></p>
+        <div class="center-box">
+            <h2>Lütfen Kullanıcı Adınızı Girin</h2>
+            <input type="text" id="usernameInput" placeholder="Kullanıcı Adı">
+            <button onclick="confirmUsername()">Onayla</button>
         </div>
         
-        <div id="usernameSection" style="display:none;">
-            <p>Enter your username:</p>
-            <input type="text" id="usernameInput" placeholder="Enter your username">
-            <button onclick="setUsername()">Enter</button>
-        </div>
-        
-        <div id="chatSection" style="display:none;">
-            <div id="messages">
-                <!-- Chat messages will appear here -->
-            </div>
-            <div id="inputArea">
-                <input type="text" id="messageInput" placeholder="Type your message...">
-                <input type="file" id="fileInput" accept="image/*, video/*"> <!-- File upload button -->
-                <button onclick="sendMessage()">Send</button>
+        <div id="chatPanel" class="chat-panel hidden">
+            <div id="messageArea" class="message-area"></div>
+            <div class="message-input">
+                <input type="text" id="messageInput" placeholder="Mesajınızı yazın...">
+                <button onclick="sendMessage()">Gönder</button>
+                <input type="file" id="fileInput">
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <script src="script.js"></script> <!-- JavaScript dosyası -->
 </body>
 </html>
