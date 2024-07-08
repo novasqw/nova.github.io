@@ -1,75 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gartic Bot Yönetim Paneli</title>
-<style>
-    body {
-        background-color: black;
-        color: white;
-        font-family: Arial, sans-serif;
-        text-align: center;
-    }
-    .container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        margin: 5px;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    .btn-red {
-        background-color: #f44336;
-    }
-    .btn-blue {
-        background-color: #2196F3;
-    }
-    .input-box {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        box-sizing: border-box;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Chat</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file for styling -->
 </head>
 <body>
-<div class="container">
-    <h1>Gartic Bot Yönetim Paneli</h1>
-    <p>Oda kodunu girerek botları yönlendirin:</p>
-    <input type="text" class="input-box" id="roomCode" placeholder="Oda Kodu">
-    <button class="btn btn-blue" onclick="openRoom()">Odaya Katıl</button>
-    <div id="botStatus"></div>
-    <div id="garticFrame" style="display: none;">
-        <iframe id="garticIframe" src="" width="100%" height="600px" frameborder="0"></iframe>
+    <div class="container">
+        <div id="passwordSection">
+            <h2>Welcome to Photo Chat!</h2>
+            <p>Please enter the password to continue:</p>
+            <input type="password" id="passwordInput" placeholder="Enter your password">
+            <button onclick="checkPassword()">Enter</button>
+            <p id="passwordMessage" class="notification"></p>
+        </div>
+        
+        <div id="usernameSection" style="display:none;">
+            <p>Enter your username:</p>
+            <input type="text" id="usernameInput" placeholder="Enter your username">
+            <button onclick="setUsername()">Enter</button>
+        </div>
+        
+        <div id="chatSection" style="display:none;">
+            <div id="messages">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div id="inputArea">
+                <input type="text" id="messageInput" placeholder="Type your message...">
+                <input type="file" id="fileInput" accept="image/*, video/*"> <!-- File upload button -->
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<script>
-function openRoom() {
-    var roomCode = document.getElementById('roomCode').value.trim();
-    if (roomCode === "") {
-        alert("Lütfen geçerli bir oda kodu girin!");
-        return;
-    }
-    var garticUrl = 'https://gartic.io/' + roomCode;
-    document.getElementById('garticFrame').style.display = 'block';
-    document.getElementById('garticIframe').src = garticUrl;
-    document.getElementById('botStatus').innerHTML = 'Botlar başarıyla yönlendirildi!';
-}
-</script>
-
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
