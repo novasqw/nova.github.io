@@ -25,6 +25,26 @@ body {
     margin-top: 0;
 }
 
+.center-box input[type="text"],
+.center-box button {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: calc(100% - 22px); /* Buton ve input genişliğini ayarla */
+    box-sizing: border-box; /* Padding dahil kutu modeli */
+}
+
+.center-box button {
+    background-color: #4CAF50; /* Yeşil buton arka planı */
+    color: white;
+    cursor: pointer;
+}
+
+.center-box button:hover {
+    background-color: #45a049; /* Butona gelindiğinde rengi değiştir */
+}
+
 .chat-panel {
     background-color: #f0f0f0; /* Açık gri bir arka plan */
     padding: 20px;
@@ -32,10 +52,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     margin: 20px auto;
-}
-
-.chat-panel.hidden {
-    display: none; /* Başlangıçta gizli */
 }
 
 .message-area {
@@ -53,9 +69,7 @@ body {
 }
 
 .message-input input[type="text"] {
-    flex: 1;
     padding: 8px;
-    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
