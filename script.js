@@ -12,6 +12,13 @@ function confirmUsername() {
     // Chat panelini göster
     var chatPanel = document.getElementById('chatPanel');
     chatPanel.classList.remove('hidden');
+
+    // Butonları canlandır (isteğe bağlı)
+    var buttons = document.querySelectorAll('.center-box button');
+    buttons.forEach(function(button) {
+        button.style.backgroundColor = '#4CAF50';
+        button.style.color = 'white';
+    });
 }
 
 function sendMessage() {
@@ -28,7 +35,7 @@ function sendMessage() {
     // Mesaj alanını temizle
     messageInput.value = '';
     
-    // Gönderilen mesajı görüntüleme (opsiyonel)
+    // Gönderilen mesajı görüntüleme
     displayMessage(message);
 }
 
