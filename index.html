@@ -3,17 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuş Oyunu</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bot Ekleme Sayfası</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #buttons {
+            margin-top: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        #addBot {
+            background-color: #0000FF; /* Mavi */
+            color: #fff;
+        }
+        #enter {
+            background-color: #FFD700; /* Sarı */
+            color: #000;
+        }
+        #exit {
+            background-color: #FF0000; /* Kırmızı */
+            color: #fff;
+        }
+        iframe {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #fff;
+        }
+    </style>
 </head>
 <body>
-    <div id="gameContainer">
-        <div id="developer">Developer by Yusuf</div>
-        <canvas id="gameCanvas"></canvas>
-        <button id="startButton">BAŞLAT</button>
-        <button id="flapButton" class="hidden">Tıkla!</button>
-        <button id="restartButton" class="hidden">Tekrar Oyna</button>
+    <h1>Bot Ekleme Sayfası</h1>
+    <div id="buttons">
+        <button id="addBot">Bot Ekle</button>
+        <button id="enter">Gir</button>
+        <button id="exit">Çık</button>
     </div>
-    <script src="game.js"></script>
+    <div id="iframes"></div>
+
+    <script>
+        document.getElementById('addBot').addEventListener('click', function() {
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://blockaway.netlify.app/your-gartic-io-link';
+            iframe.width = '600';
+            iframe.height = '400';
+            document.getElementById('iframes').appendChild(iframe);
+        });
+
+        document.getElementById('enter').addEventListener('click', function() {
+            var iframes = document.querySelectorAll('#iframes iframe');
+            iframes.forEach(function(iframe) {
+                var contentWindow = iframe.contentWindow;
+                contentWindow.document.querySelector('.ic-playHome').click();
+            });
+        });
+
+        document.getElementById('exit').addEventListener('click', function() {
+            var iframes = document.querySelectorAll('#iframes iframe');
+            iframes.forEach(function(iframe) {
+                var contentWindow = iframe.contentWindow;
+                contentWindow.document.querySelector('.exit').click();
+            });
+        });
+    </script>
 </body>
 </html>
