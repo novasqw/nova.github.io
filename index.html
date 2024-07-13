@@ -34,9 +34,25 @@
             background-color: #FF0000; /* Kırmızı */
             color: #fff;
         }
+        .iframe-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #008000; /* Yeşil */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
         iframe {
             display: block;
-            margin: 20px auto;
             border: 1px solid #fff;
         }
     </style>
@@ -52,18 +68,34 @@
 
     <script>
         document.getElementById('addBot').addEventListener('click', function() {
+            var iframeContainer = document.createElement('div');
+            iframeContainer.className = 'iframe-container';
+
+            var closeButton = document.createElement('button');
+            closeButton.className = 'close-button';
+            closeButton.textContent = '❌';
+            closeButton.addEventListener('click', function() {
+                iframeContainer.remove();
+            });
+
             var iframe = document.createElement('iframe');
             iframe.src = 'https://www.blockaway.net/';
             iframe.width = '600';
             iframe.height = '400';
-            document.getElementById('iframes').appendChild(iframe);
+
+            iframeContainer.appendChild(closeButton);
+            iframeContainer.appendChild(iframe);
+            document.getElementById('iframes').appendChild(iframeContainer);
         });
 
         document.getElementById('enter').addEventListener('click', function() {
             var iframes = document.querySelectorAll('#iframes iframe');
             iframes.forEach(function(iframe) {
                 var contentWindow = iframe.contentWindow;
-                contentWindow.document.querySelector('.ic-playHome').click();
+                var playHomeButton = contentWindow.document.querySelector('.ic-playHome');
+                if (playHomeButton) {
+                    playHomeButton.click();
+                }
             });
         });
 
@@ -71,7 +103,10 @@
             var iframes = document.querySelectorAll('#iframes iframe');
             iframes.forEach(function(iframe) {
                 var contentWindow = iframe.contentWindow;
-                contentWindow.document.querySelector('.exit').click();
+                var exitButton = contentWindow.document.querySelector('.exit');
+                if (exitButton) {
+                    exitButton.click();
+                }
             });
         });
     </script>
