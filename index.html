@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Giriş Sayfası</title>
+    <title>Kuş Oyunu</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Hoş Geldiniz</h1>
-        <div class="form-container">
-            <input type="text" placeholder="Kullanıcı Adınızı Girin" id="username">
-            <input type="password" placeholder="Şifrenizi Girin" id="password">
-            <button onclick="validate()">Giriş Yap</button>
-        </div>
+    <div id="gameContainer">
+        <div id="developer">Developer by Yusuf</div>
+        <canvas id="gameCanvas"></canvas>
+        <button id="startButton">BAŞLAT</button>
+        <button id="flapButton" class="hidden">Tıkla!</button>
+        <button id="restartButton" class="hidden">Tekrar Oyna</button>
     </div>
-    <div class="background"></div>
-    <script src="script.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
